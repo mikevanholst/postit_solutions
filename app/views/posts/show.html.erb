@@ -1,0 +1,6 @@
+<h2>Show Post Page</h2>
+
+<%# @post = Post.find(params[:id]) %>
+<h3><%= link_to @post.title, "http://#{@post.url}" %></h3>
+
+<p><%= @post.description %></p>

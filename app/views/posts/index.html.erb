@@ -1,3 +1,11 @@
 <h3>Welcome!</h3>
 
-<p>This is the Postit template. You've access the PostsController, index action. This is the index template. Find me under app/views/posts folder.</p>
+<p>This is the Postit template. You've access the PostsController, index action. This is the index 
+template. Find me under app/views/posts folder.</p>
+
+
+<% @posts.each do |post| %>
+
+  <h3><%= link_to post.title, post %></h3>
+  <p><%= truncate(post.description, length: 50) %></p>
+<% end %>

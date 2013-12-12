@@ -1,6 +1,55 @@
 <h2>Show Post Page</h2>
+<%= link_to "Back", posts_path %>
 
-<%# @post = Post.find(params[:id]) %>
+<br />
+
 <h3><%= link_to @post.title, "http://#{@post.url}" %></h3>
 
 <p><%= @post.description %></p>
+
+
+ <% @post.categories.each do |category| %>
+ <%= link_to category.name, category_path(category), class: 'badge' %>
+ <% end %>
+
+<br />
+
+<%= link_to "Edit post", edit_post_path(@post) %>
+
+<br />
+
+<p>
+
+<%= form_for [@post, @comment] do  |f| %>
+<%= render 'shared/errors', obj: @comment %>
+  <div class = 'control-group'>
+    <%= f.label :body, "Leave a comment" %>
+    <%= f.text_area :body %>
+  </div>
+
+  
+    <%= f.submit "Create Comment", class: "btn btn-primary" %>
+
+<% end %>
+</p>
+
+
+  <% @post.comments.each do |comment| %>
+  <% unless comment.new_record? %>
+    <div class='well span8'> 
+     
+      <%= comment.body %>
+      <br />
+      <span class='quiet'>
+      posted on <%= comment.created_at.strftime("%b. %d")  %> 
+       by <%= comment.creator.username %></span>
+       <% end %>
+
+    </div>
+  <% end %>
+
+
+
+
+
+

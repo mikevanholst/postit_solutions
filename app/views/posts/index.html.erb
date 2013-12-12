@@ -6,6 +6,15 @@ template. Find me under app/views/posts folder.</p>
 
 <% @posts.each do |post| %>
 
+<div class='well span8'>
+
+
+<% post.categories.each do |category| %>
+ <%= link_to category.name, category_path(category), class: 'badge' %>
+ <% end %>
+
   <h3><%= link_to post.title, post %></h3>
-  <p><%= truncate(post.description, length: 50) %></p>
+  <p><%= truncate(post.description, length: 50) %>
+  </p>
+</div>
 <% end %>

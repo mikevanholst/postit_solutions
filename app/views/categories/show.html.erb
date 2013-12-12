@@ -1,0 +1,15 @@
+<p>
+<h2><%= @category.name %></h2>
+ <%= pluralize( @category.posts.count, 'post') %> in this category
+</p>
+
+
+
+<% @category.posts.each do |post| %>
+
+<div class='well span8'>
+  <h3><%= link_to post.title, post_path(post) %></h3>
+  <p><%= truncate(post.description, length: 50) %>
+  </p>
+</div>
+<% end %>

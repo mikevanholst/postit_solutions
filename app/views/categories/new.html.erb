@@ -1,0 +1,31 @@
+<h2>New Category</h2>
+
+
+<%= render 'shared/errors', obj: @category %>
+
+
+
+<p>
+<h4>
+Add a new category to the list:
+</h4>
+
+<% Category.all.order(:name).each do |category|  %>
+  <%= "#{category.name}, " unless category == Category.last %>
+  <%= "#{category.name}." if category == Category.last %>
+  <% end %>
+</p>
+
+
+<%= form_for @category do |category| %>
+
+  <div class='control-group'>
+    <%= category.label :name %>
+    <%= category.text_field :name %>
+  </div>
+
+  <div class='action'>
+    <%= category.submit %>
+  </div>
+
+<% end %>

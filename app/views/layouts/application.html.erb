@@ -13,6 +13,17 @@
   </head>
   <body>
     <header>
+      <div class='well '>
+ Params<%= params.inspect %>
+ <br />
+   Current user <%= "is #{current_user }" %>
+   <br />
+   Logged in? <%= logged_in? %>
+   <br />
+   Session user id <%= session[:user_id] %>
+   <br />
+   controller action: <%= controller.action_name %>
+</div>
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container">
@@ -33,5 +44,7 @@
         </footer>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
+
+
   </body>
 </html>

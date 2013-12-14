@@ -1,12 +1,18 @@
-<h2>Show Post Page</h2>
-<%= link_to "Back", posts_path %>
 
-<br />
 
-<h3><%= link_to @post.title, "http://#{@post.url}" %></h3>
 
-<p><%= @post.description %></p>
+<p class=pull-right><%= link_to "Edit post", edit_post_path(@post) if logged_in? %></p>
+<%#= link_to "Back", posts_path %>
 
+<%= render 'shared/title_format', title: @post.title %>
+
+
+
+<p class='panel' >
+  <%= @post.description %>
+  <br /></p>
+  <%= link_to @post.url, fix_url(@post.url) %>
+  <br />
 
  <% @post.categories.each do |category| %>
  <%= link_to category.name, category_path(category), class: 'badge' %>
@@ -14,24 +20,21 @@
 
 <br />
 
-<%= link_to "Edit post", edit_post_path(@post) %>
+
 
 <br />
-
-<p>
-
-<%= form_for [@post, @comment] do  |f| %>
-<%= render 'shared/errors', obj: @comment %>
-  <div class = 'control-group'>
-    <%= f.label :body, "Leave a comment" %>
-    <%= f.text_area :body %>
-  </div>
-
-  
-    <%= f.submit "Create Comment", class: "btn btn-primary" %>
-
+<% if logged_in? %>
+  <p>
+  <%= form_for [@post, @comment] do  |f| %>
+  <%= render 'shared/errors', obj: @comment %>
+    <div class = 'control-group'>
+      <%= f.label :body, "Leave a comment" %>
+      <%= f.text_area :body %>
+    </div>
+      <%= f.submit "Create Comment", class: "btn btn-primary" %>
+  <% end %>
+  </p>
 <% end %>
-</p>
 
 
   <% @post.comments.each do |comment| %>

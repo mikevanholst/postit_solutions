@@ -1,4 +1,4 @@
-<h2>New Category</h2>
+<%= render 'shared/title_format', title: 'Add New Category' %>
 
 
 <%= render 'shared/errors', obj: @category %>
@@ -6,9 +6,9 @@
 
 
 <p>
-<h4>
-Add a new category to the list:
-</h4>
+<strong>
+Existing Categories: 
+</strong>
 
 <% Category.all.order(:name).each do |category|  %>
   <%= "#{category.name}, " unless category == Category.last %>
@@ -16,6 +16,7 @@ Add a new category to the list:
   <% end %>
 </p>
 
+<br />
 
 <%= form_for @category do |category| %>
 

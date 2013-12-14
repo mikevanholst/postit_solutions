@@ -2,7 +2,76 @@
   <li>
     <%= link_to "Postit!", root_path, :class => 'brand' %>
   </li>
-  <li>
-    <%= link_to 'New', new_post_path %>
+  <li >
+   <div class='nav_item'>
+  <%= link_to 'New Post', new_post_path, class: 'btn btn-success btn-small' if logged_in? %>
+</div>
   </li>
+
+
+  <li>
+    <div class="btn-group nav_item">
+    <%= link_to '#', class: "btn dropdown-toggle btn-small", 'data-toggle' => 'dropdown' do %>
+      Categories <span class="caret"></span>
+    <% end %>
+      <ul class="dropdown-menu">
+        <% Category.all.each do |category| %>
+          <li>
+            <%= link_to category.name, category_path(category)  %>
+          </li>
+        <% end %>
+
+      <% if logged_in? %>
+        <li class="divider"></li>
+        <li>
+          <%= link_to new_category_path do %>
+            <i class="icon-plus"></i>
+            New Category
+          <% end %>
+        </li>
+       <% end %>
+        
+      </ul>
+    </div>
+  </li>
+
+
+<% if logged_in? %>
+<li>
+    <div class='nav_item'>
+     <div class="btn-group nav-item">
+  <!-- <button type="button" class="btn btn-danger">Action</button> -->
+  <button type="button" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+  
+    <span class="sr-only"><%= current_user.username %></span>
+      <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><%= link_to "Log out", logout_path%></li>
+    <li><%= link_to 'Edit profile', edit_user_path(current_user) %></li>
+    <li>Something else here</li>
+    <li class="divider"></li>
+    <li>Separated link</li>
+  </ul>
+</div>
+    </div>
+  </li>
+<% end %>
+
+
+  <li>
+    <div class='nav_item'>
+     <%= link_to "log in", login_path, class: 'btn btn-small btn-primary' unless logged_in?  %>
+    </div>
+  </li>
+
+  <li>
+    <div class='nav_item'>
+      <%= link_to "register", register_path, class: 'btn btn-small btn-success' unless logged_in?  %>
+    </div>
+  </li>
+  
+ 
+
+
 </ul>

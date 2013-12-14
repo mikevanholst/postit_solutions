@@ -1,4 +1,4 @@
-
+                                            
 
 
 <p class=pull-right><%= link_to "Edit post", edit_post_path(@post) if logged_in? %></p>
@@ -12,7 +12,9 @@
   <%= @post.description %>
   <br /></p>
   <%= link_to @post.url, fix_url(@post.url) %>
-  <br />
+  <p> <span class='quiet'>
+      <%= who_and_when(@post) %></span>
+     </p>
 
  <% @post.categories.each do |category| %>
  <%= link_to category.name, category_path(category), class: 'badge' %>
@@ -44,8 +46,7 @@
       <%= comment.body %>
       <br />
       <span class='quiet'>
-      posted on <%= comment.created_at.strftime("%b. %d")  %> 
-       by <%= comment.creator.username %></span>
+     <%= who_and_when(comment) %></span>
        <% end %>
 
     </div>

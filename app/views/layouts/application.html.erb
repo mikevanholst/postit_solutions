@@ -12,7 +12,8 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <header>
+    <header> 
+      <% if false %>
       <div class='well '>
  Params<%= params.inspect %>
  <br />
@@ -23,7 +24,27 @@
    Session user id <%= session[:user_id] %>
    <br />
    controller action: <%= controller.action_name %>
+   <br />
+   post id: <%= @post %>
+   <br />
+   comment id: <%= @comment %>
+   <br />
+   last Post: <%= Post.last.title %> by<%= Post.last.user_id %>
+   <br />
+   last comment:  <%= Comment.last.body %> by  <%= Comment.last.user_id %>
+   <br />
+   Just submitted?<%= comment_just_submitted %>
+   <br />
+   user votes: <%= user_votes %>
+<br />
+
+    last post votes <%= post_votes(Post.last) %>
+<br />
+<%= already_voted(Post.last) %>
+
 </div>
+<% end %>
+
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container">

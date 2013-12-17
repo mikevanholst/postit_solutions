@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-  before_action :require_user, only: [:new, :create]
+  before_action :require_user, only: [:new, :create, :vote]
 
   def new
     @category = Category.new
@@ -23,6 +23,7 @@ class CategoriesController < ApplicationController
   end
 
 
+  
   private
 
   def category_params

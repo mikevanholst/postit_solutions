@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
 before_action :get_user, only: [:edit, :update, :show]
+ before_action :require_user, only: :show
 
   def new
     @user = User.new
@@ -44,5 +45,9 @@ before_action :get_user, only: [:edit, :update, :show]
     @user = current_user
     
   end
+
+
+
+
 
 end

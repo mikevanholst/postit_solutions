@@ -3,6 +3,18 @@
 
 <div class='well'>
   <p>Username: <%= current_user.username %></p>
+  <p>Time zone: <%= current_user.time_zone %></p>
+  <p>Phone: <%= current_user.phone %></p>
+  <p>Two factor Auth: <%= current_user.two_factor_auth %></p>
   
-
 </div>
+
+
+<% current_user.comments.each do |comment| %>
+  <%= render 'posts/display_comment', comment: comment  %>  
+<% end %>
+
+<% current_user.posts.each do |post| %>
+  <%= render 'posts/display_a_post', post: post %>  
+<% end %>
+

@@ -3,6 +3,8 @@ class PostsController < ApplicationController
   before_action :get_post, only: [:edit, :show, :update, :vote]
   before_action :require_user, except: [:index, :show, :vote]
   
+helper_method :user_votes, :post_votes,  :already_voted 
+
   def index
     @posts = Post.all.sort_by{ |p| p.total_votes}.reverse
   end
@@ -40,10 +42,14 @@ class PostsController < ApplicationController
   end
 
   def vote
-    Vote.create(votable: @post, creator: current_user, vote: params[:vote] )
-    flash[:notice] = "Your vote was counted."
+    if already_voted(@post)
+       flash[:alert] = "You can only vote once per post" 
+       # alert: "You can only vote once per post" 
+     else
+       Vote.create(votable: @post, creator: current_user, vote: params[:vote] )
+      flash[":vote_for_#{@post.id}_notice"] = "Your vote was counted."
+    end
     redirect_to :back
-    
   end
 
 
@@ -57,5 +63,15 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :url, :description, :user_id, category_ids: [])
     
   end
+
+  # def user_votes
+  #   user_votes = []
+  #   current_user.votes.each do |v|
+  #     user_votes << v.id
+  #   end
+  #   return user_votes
+  # end
+
+  
 
 end

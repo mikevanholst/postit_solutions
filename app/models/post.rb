@@ -25,7 +25,6 @@ validates_presence_of :description, message: "please add a description"
 
   def total_votes
     self.up_votes - self.down_votes
-    
   end
 
 end

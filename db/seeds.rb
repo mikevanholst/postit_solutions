@@ -25,4 +25,5 @@ end
 end
 
 100.times do |v|
-  Vote.create(vote: true, votable_type: ['Post', 'Comment'].sample , votable_id: post_id: (1..10).to_a.sample, user_id: [1,2,3,4,5].sample )
+  Vote.create(vote: true, votable_type: ['Post', 'Comment'].sample, votable_id: (1..10).to_a.sample, user_id: [1,2,3,4,5].sample )
+end 

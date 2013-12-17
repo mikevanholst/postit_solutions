@@ -16,10 +16,31 @@ helper_method :current_user, :logged_in?
 
   def require_user
     if !logged_in?
-      flash[:notice] = "You must be logged in to do that!"
+      flash[:alert] = "You must be logged in to do that!"
       redirect_to root_path
     end
   end
 
+
+def user_votes
+    user_votes = []
+    current_user.votes.each do |v|
+      user_votes << v.id
+    end
+    return user_votes
+  end
+
+
+  def  post_votes(post)
+    post_votes = []
+    post.votes.each do |v|
+     post_votes << v.id
+    end
+    return post_votes
+  end
+
+  def already_voted(post)
+   (user_votes & post_votes(post)).present?
+  end
 end
 

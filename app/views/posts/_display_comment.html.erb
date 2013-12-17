@@ -1,0 +1,40 @@
+  <% @post = comment.post %>
+
+
+    <div class='row comment_fields'>
+
+    <div class="voted">
+      <%= flash[":vote_for_#{comment.id}_notice"] %>
+    </div>
+    <br />
+
+    <div class = 'span1 well text-center'>
+      <% if logged_in? %>
+
+    <%= link_to  vote_post_comment_path(@post, comment, vote: true), method: 'post'  do %>
+      <i class='icon-arrow-up'></i>
+     <% end %>
+      <br />
+     <%= comment.total_votes %>
+      <br />
+   <%= link_to vote_post_comment_path(@post, comment, vote: false), method: 'post'  do %>
+      <i class='icon-arrow-down'></i>
+     <% end %>
+
+  <% else %>
+  Votes
+  <br />
+   <%= comment.total_votes %>
+  <% end %>
+  </div>
+
+    <% unless comment.new_record? %>
+      <div class='well span8'> 
+       <%= comment.body %>
+       <br />
+       <span class='quiet'>
+        <span > <%= link_to who_and_when(comment), user_path(comment.user_id)  %> </span>
+      </div>
+    <% end %>
+  
+</div>

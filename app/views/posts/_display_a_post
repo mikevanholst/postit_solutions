@@ -1,0 +1,43 @@
+<div class= 'row'>
+<div class="voted">
+    <%= flash[":vote_for_#{post.id}_notice"] %>
+   </div>
+   <br />
+  <div class = 'span0 well text-center'>
+
+    <% if logged_in?  %>
+        <%= link_to vote_post_path(post, vote: true), method: 'post'  do  %>
+          <i class='icon-arrow-up'></i>
+        <% end %>
+        <br />
+         <%= post.total_votes %>
+        <br />
+         <%= link_to vote_post_path(post, vote: false), method: 'post'  do %>
+          <i class='icon-arrow-down'></i>
+         <% end %>
+      
+    <% else %>
+    Votes
+    <br />
+     <%= post.total_votes %>
+    <% end %>
+  </div>
+
+  <div class='well span8'>
+
+    <% post.categories.order(:name).each do |category| %>
+     <%= link_to category.name, category_path(category), class: 'badge' %>
+     <% end %>
+
+      <h3><%= link_to post.title, post %>  </h3>
+
+      <p><%= truncate(post.description, length: 50) %>
+      </p>
+    <span><%= link_to post.url, fix_url('/www.gotealeaf.com') %> </span>
+    <p>
+
+     <span > <%= link_to who_and_when(post), user_path(post.user_id)  %> </span>
+     <span class='pull-right'><%= pluralize( post.comments.count, 'comment') %>  </span>
+       </p>
+   </div>
+</div>

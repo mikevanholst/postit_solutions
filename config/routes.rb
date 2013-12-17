@@ -8,14 +8,19 @@ PostitTemplate::Application.routes.draw do
 
 
     
-  resources :categories, has_many: :votes
+  resources :categories
   resources :posts, except: [:destroy] do
     member do
       post 'vote'
     end
 
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:new, :create] do
+      member do
+       post 'vote'
+      end
+    end
   end
+
   resources :users, only: [:show, :edit, :create, :update]
 
   root to: 'posts#index'

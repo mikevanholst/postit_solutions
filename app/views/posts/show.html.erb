@@ -38,21 +38,14 @@
   </p>
 <% end %>
 
+<div class='row'> 
 
-  <% @post.comments.each do |comment| %>
-  <% unless comment.new_record? %>
-    <div class='well span8'> 
-     
-      <%= comment.body %>
-      <br />
-      <span class='quiet'>
-     <%= who_and_when(comment) %></span>
-       <% end %>
-
-    </div>
+  <%= render 'display_comment',  comment: Comment.last if comment_just_submitted %>
+  <% @post.comments.sort_by{ |c| c.total_votes}.reverse.each do |comment| %>
+   <%= render 'display_comment',  comment: comment unless comment_just_submitted && comment == Comment.last %>
   <% end %>
 
-
+</div>
 
 
 

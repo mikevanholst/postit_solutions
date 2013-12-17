@@ -9,12 +9,29 @@
   
 </div>
 
+<%= @user.username %>'s activity
+<br />
+<br />
 
-<% current_user.comments.each do |comment| %>
-  <%= render 'posts/display_comment', comment: comment  %>  
-<% end %>
+<ul class="nav nav-tabs">
+  <li class='<%= 'active' if params[:tab].nil? %>'>
+  <%= link_to "Posts (#{@user.posts.size})", user_path(@user) %>
+  </li>
+ <li class='<%= 'active' if params[:tab]== 'comments' %>'>
+   <%= link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments') %>
+  </li>
+</ul>
 
-<% current_user.posts.each do |post| %>
-  <%= render 'posts/display_a_post', post: post %>  
+
+<% if params[:tab].nil?  %>
+  <% current_user.posts.each do |post| %>
+    <%= render 'posts/display_a_post', post: post %>  
+  <% end %>
+<% elsif params[:tab] == 'comments' %>
+
+  <% current_user.comments.each do |comment| %>
+    <%= render 'posts/display_comment', comment: comment  %>  
+  <% end %>
+
 <% end %>
 

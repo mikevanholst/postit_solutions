@@ -8,6 +8,7 @@ before_action :get_user, only: [:edit, :update, :show]
   end
 
   def show
+
   end
 
   def create
